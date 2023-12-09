@@ -15,6 +15,9 @@ const query = `query getPokemons($first: Int!) {
     image
   }
 }`
+const variables = {
+  first: 30
+};
 export default function Home() {
   const [pokemons, setPokemons] = useState([])
   const makeRequest = (query:string, variables: any) => {
@@ -27,10 +30,6 @@ export default function Home() {
     }).then(res => res.json())
   }
 
-  const variables = {
-    first: 30
-  };
-
   useEffect(() => {
     makeRequest(query, variables).then(res => setPokemons(res.data.pokemons))
   },[])
@@ -39,12 +38,13 @@ export default function Home() {
     <main
         // className={styles.main}
     >
-        <Divider orientation="center">Pokemon's</Divider>
+        <Divider orientation="center">Pokemon&apos;s</Divider>
       <Flex wrap="wrap" gap="large" justify="center">
             {pokemons.map((pokemon:Pokemon) => {
               const { Meta } = Card;
                 return (
                         <Card
+                            key={pokemon.id}
                             bodyStyle={{backgroundColor: "lavender"}}
                             hoverable
                             style={{ width: 300 }}
