@@ -6,7 +6,6 @@ import { Divider, Card, Flex, Pagination } from 'antd';
 import {Pokemon} from "@/types/types";
 
 
-const style: React.CSSProperties = { background: '#0092ff', padding: '20px 40px' };
 const url = 'https://graphql-pokemon2.vercel.app'
 const query = `query getPokemons($first: Int!) {
   pokemons(first: $first) {
