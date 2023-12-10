@@ -26,7 +26,9 @@ const PokemonsList = ({pokemons = []}: PokemonsListProps) => {
             label: value,
             value,
         }))
-    const pokemonsToMap = pokemons.filter(value => value.name.toLowerCase().includes(nameSearch)).filter(value => {
+    const pokemonsToMap:Pokemon[] = pokemons.filter(value =>
+        value.name.toLowerCase().includes(nameSearch))
+        .filter(value => {
         if (classes.length) {
             return classes.includes(value.classification)
         } else return true
@@ -53,7 +55,10 @@ const PokemonsList = ({pokemons = []}: PokemonsListProps) => {
             </Flex>
             <Divider orientation="center">Pokemon&apos;s</Divider>
             <Flex wrap="wrap" gap="large" justify="center">
-                {pokemons && pokemonsToMap
+                {!pokemonsToMap.length && <div>
+                    No Pokemons found
+                </div>}
+                {!!pokemonsToMap.length && pokemonsToMap
                     //cut pokemons for pages
                     .slice(startIndex, endIndex)
                     .map((pokemon: Pokemon) => {
@@ -82,6 +87,7 @@ const PokemonsList = ({pokemons = []}: PokemonsListProps) => {
             <Divider/>
             <Flex justify="center">
                 <Pagination
+                    hideOnSinglePage
                     current={currentPage}
                     showSizeChanger={false}
                     onChange={(page) => setCurrentPage(page)}
