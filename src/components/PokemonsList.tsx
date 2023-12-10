@@ -1,6 +1,7 @@
 'use client'
+import styles from '../app/globals.module.css'
 import {ChangeEvent, useState} from "react";
-import {Card, Divider, Flex, Pagination, Select, Typography} from "antd";
+import {Card, Divider, Flex, Pagination, Select} from "antd";
 import type {SelectProps} from 'antd';
 import {Pokemon} from "@/types/types";
 import Image from "next/image";
@@ -18,7 +19,6 @@ const PokemonsList = ({pokemons = []}: PokemonsListProps) => {
     const itemsPerPage = 10;
     const startIndex = (currentPage - 1) * itemsPerPage;
     const endIndex = startIndex + itemsPerPage;
-    const {Title} = Typography;
     const options: SelectProps['options'] = []
     //Creating pokemons class options for filtering
     new Set(pokemons.map((pokemon: Pokemon) => pokemon.classification))
@@ -35,23 +35,30 @@ const PokemonsList = ({pokemons = []}: PokemonsListProps) => {
     })
     return (
         <>
-            <Flex vertical align="center">
-                <Title level={4}>Search Pokemon By Name</Title>
-                <Search
-                    placeholder="Search Pokemon By Name"
-                    value={nameSearch}
-                    allowClear
-                    onChange={(e: ChangeEvent<HTMLInputElement>) => setNameSearch(e.target.value.trim().toLowerCase())}
-                    style={{width: 300}}/>
-                <Title level={4}>Select Pokemon&apos;s Classes</Title>
+            <Flex align="center" justify={"center"} wrap={"wrap"}>
+                <Flex align="center" justify={"center"} wrap={"wrap"}>
+                    <h4 className={styles.me1}>Search Pokemon By Name</h4>
+                    <Search
+                        className={styles.me1}
+                        placeholder="Search Pokemon By Name"
+                        value={nameSearch}
+                        allowClear
+                        onChange={(e: ChangeEvent<HTMLInputElement>) => setNameSearch(e.target.value.trim().toLowerCase())}
+                        style={{width: 300}}/>
+                </Flex>
+                <Flex align="center" justify={"center"} wrap={"wrap"}>
+                <h4 className={styles.me1}>Select Pokemon&apos;s Classes</h4>
                 <Select
+                    className={styles.me1}
                     mode="multiple"
-                    style={{minWidth: 300}}
+                    style={{width: 300}}
                     placeholder="Select Pokemons Classes"
                     allowClear
                     onChange={value => setClasses(value)}
                     options={options}
                 />
+                    <span>&nbsp;</span>
+                </Flex>
             </Flex>
             <Divider orientation="center">Pokemon&apos;s</Divider>
             <Flex wrap="wrap" gap="large" justify="center">

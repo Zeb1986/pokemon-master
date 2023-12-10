@@ -1,6 +1,7 @@
 import React from 'react';
 import { Inter } from 'next/font/google';
 import StyledComponentsRegistry from '../lib/AntdRegistry';
+// import styles from './globals.module.css'
 
 const inter = Inter({ subsets: ['latin'] });
 
