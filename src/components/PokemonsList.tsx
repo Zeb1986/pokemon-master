@@ -1,6 +1,6 @@
 'use client'
-import {ChangeEvent, useState, Suspense} from "react";
-import {Card, Divider, Flex, Pagination, Select, Spin, Typography} from "antd";
+import {ChangeEvent, useState} from "react";
+import {Card, Divider, Flex, Pagination, Select, Typography} from "antd";
 import type {SelectProps} from 'antd';
 import {Pokemon} from "@/types/types";
 import Image from "next/image";
@@ -65,14 +65,12 @@ const PokemonsList = ({pokemons = []}: PokemonsListProps) => {
                                     bodyStyle={{backgroundColor: "lavender"}}
                                     hoverable
                                     style={{width: 300}}
-                                    cover={<Suspense fallback={
-                                        <Spin tip="Loading" size="large">
-                                            <div className="content"/>
-                                        </Spin>}>
-                                        <Image priority={true} alt="picature of pokemon" src={pokemon.image} width={300}
-                                               height={300}/>
-                                    </Suspense>
-                                    }
+                                    cover={<Image
+                                        priority={true}
+                                        alt="picature of pokemon"
+                                        src={pokemon.image}
+                                        width={300}
+                                        height={300}/>}
                                 >
                                     <Meta title={pokemon.name} description={pokemon.classification}/>
                                 </Card>
